@@ -18,13 +18,15 @@ print_metric () {
   echo "bulwark.$1\t$2\t${current_time}"
 }
 
+#
 # Print block elapsed time since block generated
 #
 # @param string $1 Block height
+#
 get_block_elapsed_time () {
-  block_hash=`${bulwarkcli} getblockhash $1`
-  block_time=`${bulwarkcli} getblock $block_hash | jq .time`
-  elapsed_time=$((current_time - block_time))
+  local block_hash=`${bulwarkcli} getblockhash $1`
+  local block_time=`${bulwarkcli} getblock $block_hash | jq .time`
+  local elapsed_time=$((current_time - block_time))
   echo $elapsed_time
 }
 
