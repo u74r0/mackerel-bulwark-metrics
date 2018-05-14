@@ -30,6 +30,18 @@ get_block_elapsed_time () {
   echo $elapsed_time
 }
 
+# Get master node status
+status=`${bulwarkcli} masternode status`
+
+# Check master node status
+if [ $? -ne 0 ]; then
+  echo Master node is not running.
+  exit 1
+fi
+
+# Get master node address on this server
+addr=`echo $status | jq -r .addr`
+
 # Get generated block height in 24 hours
 block_count=`${bulwarkcli} getblockcount`
 block_height=$((block_count - block_generated_size_day))
@@ -47,9 +59,6 @@ else
   block_height=$((block_height + 1))
 fi
 block_generated_day=$((block_count - block_height))
-
-# Get master node address on this server
-addr=`${bulwarkcli} masternode status | jq -r .addr`
 
 # Get masternode count
 masternode_count=`${bulwarkcli} masternode count`
