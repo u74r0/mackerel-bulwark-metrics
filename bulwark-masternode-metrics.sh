@@ -80,8 +80,12 @@ print_metric payout.estimate_payout $estimate_payout_hours
 
 # Output last paid elapsed time
 lastpaid=`echo $masternode_ranked | jq .lastpaid`
-metric_value=`echo "scale=2; ($current_time - $lastpaid) / 3600" | bc`
-print_metric payout.lastpaid_elapsed $metric_value
+lastpaid_elapsed=`echo "scale=2; ($current_time - $lastpaid) / 3600" | bc`
+print_metric payout.lastpaid_elapsed $lastpaid_elapsed
+
+# Output achievement rate
+payout_rate=`echo "scale=3; ($lastpaid_elapsed / $estimate_payout_hours) * 100" | bc`
+print_metric payout_rate.rate $payout_rate
 
 # Output last seen elapsed time
 lastseen=`echo $masternode_ranked | jq .lastseen`
