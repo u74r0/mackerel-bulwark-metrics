@@ -111,3 +111,7 @@ print_metric wallet.rewards $rewards
 # Output block count
 blockcount=`${bulwarkcli} getblockcount`
 print_metric block.count $blockcount
+
+# Output next super block height
+superblock=`${bulwarkcli} getnextsuperblock`
+print_metric block.superblock $superblock
