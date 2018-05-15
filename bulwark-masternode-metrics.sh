@@ -100,3 +100,8 @@ print_metric payout_rate.rate $payout_rate
 lastseen=`echo $masternode_ranked | jq .lastseen`
 metric_value=`echo "scale=2; ($current_time - $lastseen) / 60" | bc`
 print_metric lastseen.elapsed_minutes $metric_value
+
+# Output wallet balance
+# * You should import your masternode address to local wallet
+balance=`${bulwarkcli} getbalance "*" 0 true`
+print_metric wallet.balance $balance
