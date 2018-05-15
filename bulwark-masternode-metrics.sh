@@ -104,10 +104,7 @@ print_metric lastseen.elapsed_minutes $metric_value
 # Output wallet balance
 # * You should import your masternode address to local wallet
 balance=`${bulwarkcli} getbalance "*" 0 true`
-print_metric wallet.balance $balance
-
-# Output masternode rewards
-balance=`${bulwarkcli} getbalance "*" 0 true`
+print_metric wallet.base 5000
 rewards=`echo "scale=8; $balance - 5000" | bc`
 print_metric wallet.rewards $rewards
 
