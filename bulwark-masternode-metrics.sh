@@ -105,3 +105,7 @@ print_metric lastseen.elapsed_minutes $metric_value
 # * You should import your masternode address to local wallet
 balance=`${bulwarkcli} getbalance "*" 0 true`
 print_metric wallet.balance $balance
+
+# Output block count
+blockcount=`${bulwarkcli} getblockcount`
+print_metric block.count $blockcount
