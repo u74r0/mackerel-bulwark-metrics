@@ -106,6 +106,11 @@ print_metric lastseen.elapsed_minutes $metric_value
 balance=`${bulwarkcli} getbalance "*" 0 true`
 print_metric wallet.balance $balance
 
+# Output masternode rewards
+balance=`${bulwarkcli} getbalance "*" 0 true`
+rewards=`echo "scale=8; $balance - 5000" | bc`
+print_metric wallet.rewards $rewards
+
 # Output block count
 blockcount=`${bulwarkcli} getblockcount`
 print_metric block.count $blockcount
